@@ -103,7 +103,13 @@ const movies = [
   },
 ];
 
-Movie.create(movies)
+movies.forEach(async (movie) => {
+  await Movie.create(movie);
+  // Once created, close the DB connection
+  mongoose.connection.close();
+});
+
+/* Movie.create(movies)
   .then((moviesFromDB) => {
     console.log(`Created ${moviesFromDB.length} movies`);
 
@@ -112,4 +118,4 @@ Movie.create(movies)
   })
   .catch((err) =>
     console.log(`An error occurred while creating movies from the DB: ${err}`)
-  );
+  ); */
